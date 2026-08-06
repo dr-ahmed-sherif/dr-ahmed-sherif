@@ -4,113 +4,114 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 // ===============================
-// Hero Intro
+// Hero Animation
 // ===============================
 
 const tl = gsap.timeline();
 
+
 tl.from(".navbar", {
     y: -80,
     opacity: 0,
-    duration: 1,
-    ease: "power3.out"
+    duration: 1
 })
 
-.from(".image-box", {
-    scale: 0.7,
-    opacity: 0,
-    duration: 1,
-    ease: "power3.out"
-}, "-=.5")
 
 .from(".hero h1", {
+    y: 50,
+    opacity: 0,
+    duration: .8
+})
+
+
+.from(".hero h2", {
     y: 40,
     opacity: 0,
     duration: .8
-}, "-=.5")
+})
+
 
 .from(".hero p", {
     y: 30,
     opacity: 0,
-    duration: .8
-}, "-=.5")
+    duration: .7
+})
 
-.from(".buttons a", {
-    y: 20,
-    opacity: 0,
-    stagger: .15,
-    duration: .6
-}, "-=.3")
 
-.from(".scroll-down", {
+.from(".btn", {
+    scale: 0,
     opacity: 0,
-    y: -20,
-    duration: .8
+    duration: .5
 });
 
-// ===============================
-// About Animation
-// ===============================
 
-gsap.from(".about-image", {
 
-    x: -120,
-    opacity: 0,
 
-    scrollTrigger: {
-
-        trigger: ".about",
-
-        start: "top 75%"
-
-    }
-
-});
-
-gsap.from(".about-text", {
-
-    x: 120,
-    opacity: 0,
-
-    scrollTrigger: {
-
-        trigger: ".about",
-
-        start: "top 75%"
-
-    }
-
-});
 
 // ===============================
-// Cards Animation
+// Sections Animation
 // ===============================
 
-gsap.utils.toArray(".card").forEach((card)=>{
 
-    gsap.from(card,{
+gsap.utils.toArray("section").forEach(section => {
 
-        y:80,
+
+    gsap.from(section.querySelectorAll(".section-title, .about-box, .card, .contact-box"), {
+
+        scrollTrigger: {
+
+            trigger: section,
+
+            start: "top 80%",
+
+        },
+
+
+        y:50,
 
         opacity:0,
 
-        duration:.8,
+        duration:1,
 
-        scrollTrigger:{
-
-            trigger:card,
-
-            start:"top 85%"
-
-        }
+        stagger:.2
 
     });
 
+
 });
 
+
+
+
+
 // ===============================
-// Stats Animation
+// Navbar Effect
+// ===============================
+
+
+window.addEventListener("scroll",()=>{
+
+
+    const navbar = document.querySelector(".navbar");
+
+
+    if(window.scrollY > 50){
+
+        navbar.style.boxShadow =
+        "0 5px 20px rgba(0,0,0,.1)";
+
+    }
+
+    else{
+
+        navbar.style.boxShadow = "none";
+
+    }
+
+
+});// Stats Animation
 // ===============================
 
 gsap.from(".stat",{
