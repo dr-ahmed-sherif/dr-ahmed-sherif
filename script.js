@@ -179,3 +179,26 @@ behavior:"smooth"
     });
 
 }
+// ===============================
+// Sticky Image Animation
+// ===============================
+
+gsap.to(".image-sticky img", {
+
+    scale: 0.88,
+
+    rotate: -2,
+
+    scrollTrigger: {
+
+        trigger: ".about",
+
+        start: "top center",
+
+        end: "bottom center",
+
+        scrub: true
+
+    }
+
+});
