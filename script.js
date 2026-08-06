@@ -1,116 +1,181 @@
-// Register GSAP Plugin
+// ===============================
+// GSAP
+// ===============================
+
 gsap.registerPlugin(ScrollTrigger);
 
-// ==========================
-// Hero Animation
-// ==========================
+// ===============================
+// Hero Intro
+// ===============================
 
-gsap.from(".image-box", {
-    scale: 0.8,
+const tl = gsap.timeline();
+
+tl.from(".navbar", {
+    y: -80,
     opacity: 0,
-    duration: 1.2,
+    duration: 1,
     ease: "power3.out"
-});
+})
 
-gsap.from(".hero h1", {
+.from(".image-box", {
+    scale: 0.7,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out"
+}, "-=.5")
+
+.from(".hero h1", {
     y: 40,
     opacity: 0,
-    duration: 1,
-    delay: 0.3,
-    ease: "power3.out"
-});
+    duration: .8
+}, "-=.5")
 
-gsap.from(".hero p", {
+.from(".hero p", {
     y: 30,
     opacity: 0,
-    duration: 1,
-    delay: 0.5,
-    ease: "power3.out"
-});
+    duration: .8
+}, "-=.5")
 
-gsap.from(".buttons a", {
+.from(".buttons a", {
     y: 20,
     opacity: 0,
-    duration: 0.8,
-    stagger: 0.15,
-    delay: 0.8,
-    ease: "power3.out"
+    stagger: .15,
+    duration: .6
+}, "-=.3")
+
+.from(".scroll-down", {
+    opacity: 0,
+    y: -20,
+    duration: .8
 });
 
-// ==========================
-// Image Scroll Animation
-// ==========================
+// ===============================
+// About Animation
+// ===============================
 
-gsap.to(".image-box", {
-    x: -220,
-    scale: 0.75,
-    ease: "none",
+gsap.from(".about-image", {
+
+    x: -120,
+    opacity: 0,
 
     scrollTrigger: {
-        trigger: "#about",
-        start: "top 80%",
-        end: "top 20%",
-        scrub: true
+
+        trigger: ".about",
+
+        start: "top 75%"
+
     }
+
 });
 
-// ==========================
-// Reveal Sections
-// ==========================
+gsap.from(".about-text", {
 
-gsap.utils.toArray("section").forEach((section) => {
+    x: 120,
+    opacity: 0,
 
-    gsap.from(section, {
+    scrollTrigger: {
 
-        opacity: 0,
-        y: 80,
-        duration: 1,
+        trigger: ".about",
 
-        scrollTrigger: {
-            trigger: section,
-            start: "top 85%"
+        start: "top 75%"
+
+    }
+
+});
+
+// ===============================
+// Cards Animation
+// ===============================
+
+gsap.utils.toArray(".card").forEach((card)=>{
+
+    gsap.from(card,{
+
+        y:80,
+
+        opacity:0,
+
+        duration:.8,
+
+        scrollTrigger:{
+
+            trigger:card,
+
+            start:"top 85%"
+
         }
 
     });
 
 });
 
-// ==========================
-// Navbar Effect
-// ==========================
+// ===============================
+// Stats Animation
+// ===============================
 
-window.addEventListener("scroll", () => {
+gsap.from(".stat",{
 
-    const nav = document.querySelector(".navbar");
+    y:40,
 
-    if (window.scrollY > 50) {
+    opacity:0,
 
-        nav.style.boxShadow =
-            "0 10px 30px rgba(0,0,0,.08)";
+    stagger:.2,
 
-    } else {
+    scrollTrigger:{
 
-        nav.style.boxShadow = "none";
+        trigger:".about-stats",
+
+        start:"top 80%"
 
     }
 
 });
 
-// ==========================
-// Scroll Down Button
-// ==========================
+// ===============================
+// Navbar Shadow
+// ===============================
 
-const scrollBtn = document.querySelector(".scroll-down");
+window.addEventListener("scroll",()=>{
 
-if (scrollBtn) {
+    const nav=document.querySelector(".navbar");
 
-    scrollBtn.addEventListener("click", () => {
+    if(window.scrollY>40){
 
-        window.scrollTo({
-            top: window.innerHeight,
-            behavior: "smooth"
-        });
+        nav.style.boxShadow="0 15px 45px rgba(0,0,0,.08)";
 
+        nav.style.background="rgba(255,255,255,.82)";
+
+    }
+
+    else{
+
+        nav.style.boxShadow="none";
+
+        nav.style.background="rgba(255,255,255,.72)";
+
+    }
+
+});
+
+// ===============================
+// Smooth Anchor Scroll
+// ===============================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+
+anchor.addEventListener("click",function(e){
+
+e.preventDefault();
+
+document.querySelector(this.getAttribute("href")).scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+});
+
+});
     });
 
 }
