@@ -384,13 +384,33 @@ About
 
 }
 
-.about-image{
+..about-image{
 
     position:sticky;
 
-    top:130px;
+    top:120px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
 
 }
+
+.image-sticky img{
+
+    width:100%;
+
+    max-width:380px;
+
+    border-radius:34px;
+
+    box-shadow:0 35px 90px rgba(0,0,0,.15);
+
+    transition:.4s;
+
+} 
 
 .about-image img{
 
